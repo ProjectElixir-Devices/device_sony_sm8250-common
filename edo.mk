@@ -331,9 +331,7 @@ PRODUCT_COPY_FILES += \
 #  IPACM
 PRODUCT_PACKAGES += \
     ipacm \
-    IPACM_cfg.xml \
-    libipanat \
-    liboffloadhal
+    IPACM_cfg.xml
 
 # Keymaster
 PRODUCT_PACKAGES += \
@@ -452,7 +450,6 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-full-3.9.1-vendorcompat \
     libprotobuf-cpp-lite-3.9.1-vendorcompat \
     librmnetctl \
-    libxml2 \
     extphonelib \
     extphonelib.xml
 
