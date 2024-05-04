@@ -34,9 +34,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
 
 # Overlays
-DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-lineage
-
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_PACKAGES += \
     CarrierConfigResCommon \
@@ -46,6 +43,11 @@ PRODUCT_PACKAGES += \
     SonyEdoSystemUIResCommon \
     SonyEdoTelephonyResCommon \
     WifiResCommon
+
+ifneq ($(TARGET_USES_EXTRAS_CAMERAAPPS),true)
+PRODUCT_PACKAGES += \
+    ApertureResCommon
+endif
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -191,6 +193,9 @@ PRODUCT_COPY_FILES += \
 # Authsecret
 PRODUCT_PACKAGES += \
     android.hardware.authsecret@1.0.vendor
+
+# Basic Call Recorder
+$(call inherit-product, vendor/bcr/bcr.mk)
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -384,11 +389,6 @@ PRODUCT_PACKAGES += \
 # Light
 PRODUCT_PACKAGES += \
     android.hardware.lights-service.sony_edo
-
-# LiveDisplay
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.1-service.sony
-
 
 # Net
 PRODUCT_PACKAGES += \
