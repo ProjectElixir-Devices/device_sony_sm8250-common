@@ -474,6 +474,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
+    $(DEVICE_PATH) \
     hardware/sony \
     hardware/google/pixel \
     hardware/google/interfaces
