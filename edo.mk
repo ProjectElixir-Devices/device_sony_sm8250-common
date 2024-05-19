@@ -168,7 +168,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_io_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_io_policy.conf \
     $(LOCAL_PATH)/audio/audio_platform_info_intcodec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_intcodec.xml \
     $(LOCAL_PATH)/audio/audio_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/audio_tuning_mixer.txt \
-    $(LOCAL_PATH)/audio/dax-default.xml:$(TARGET_COPY_OUT_VENDOR)/etc/dolby/dax-default.xml \
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths.xml \
     $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_platform_info.xml \
     $(LOCAL_PATH)/audio/sound_trigger_platform_info_no_SVA.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_platform_info_no_SVA.xml \
@@ -199,9 +198,12 @@ PRODUCT_PACKAGES += \
 
 # Boot control
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-impl-qti \
-    android.hardware.boot@1.2-impl-qti.recovery \
-    android.hardware.boot@1.2-service
+    android.hardware.boot@1.1-impl-qti \
+    android.hardware.boot@1.1-impl-qti.recovery \
+    android.hardware.boot@1.1-service
+
+PRODUCT_PACKAGES_DEBUG += \
+    bootctl
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -557,17 +559,12 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/privapp-permissions-wfd.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-wfd.xml
 
-# Xperia Modules
-include hardware/sony/XperiaModules.mk
-
 # Xperia Modules - Flags
 TARGET_SUPPORTS_CREATOR_MODE := true
-TARGET_SUPPORTS_SOUND_ENHANCEMENT := true
 TARGET_SUPPORTS_SOUND_ENHANCEMENT_DTS := false
 TARGET_SUPPORTS_EUICC := false
 
 # Extras
-$(call inherit-product, vendor/sony/extra/extra.mk)
 TARGET_SHIPS_SONY_CAMERA := true
 TARGET_SHIPS_SONY_APPS := true
 TARGET_SUPPORTS_GAME_CONTROLLERS := true
@@ -575,5 +572,11 @@ TARGET_SUPPORTS_GAME_CONTROLLERS := true
 # Extras and XperiaModules Combined
 TARGET_SUPPORTS_SOUND_ENHANCEMENT := true
 TARGET_SHIPS_SOUND_ENHANCEMENT := true
+
+# Xperia Modules
+$(call inherit-product, hardware/sony/XperiaModules.mk)
+
+# Extras Repo
+$(call inherit-product, vendor/sony/extra/extra.mk)
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true

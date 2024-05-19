@@ -27,15 +27,6 @@
       "ResetOnInit": true
     },
     {
-      "Name": "CPULittleClusterGovernor",
-      "Path": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
-      "Values": [
-        "schedutil",
-        "powersave"
-      ],
-      "ResetOnInit": true
-    },
-    {
       "Name": "CPUBigClusterMaxFreq",
       "Path": "/sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq",
       "Values": [
@@ -65,15 +56,6 @@
       "ResetOnInit": true
     },
     {
-      "Name": "CPUBigClusterGovernor",
-      "Path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_governor",
-      "Values": [
-        "schedutil",
-        "powersave"
-      ],
-      "ResetOnInit": true
-    },
-    {
       "Name": "CPUBigPlusClusterMaxFreq",
       "Path": "/sys/devices/system/cpu/cpu7/cpufreq/scaling_max_freq",
       "Values": [
@@ -99,15 +81,6 @@
         "1286400"
       ],
       "DefaultIndex": 3,
-      "ResetOnInit": true
-    },
-    {
-      "Name": "CPUBigPlusClusterGovernor",
-      "Path": "/sys/devices/system/cpu/cpufreq/policy7/scaling_governor",
-      "Values": [
-        "schedutil",
-        "powersave"
-      ],
       "ResetOnInit": true
     },
     {
@@ -183,6 +156,15 @@
         "10"
       ],
       "ResetOnInit": true
+    },
+    {
+      "Name": "PMQoSCpuDmaLatency",
+      "Path": "/dev/cpu_dma_latency",
+      "Values": [
+        "2c",
+        "66"
+      ],
+      "HoldFd": true
     },
     {
       "Name": "CDSchedtuneBoost",
@@ -322,6 +304,15 @@
       "Type": "Property"
     },
     {
+      "Name": "PowerHALAudioState",
+      "Path": "vendor.powerhal.audio",
+      "Values": [
+        "AUDIO_STREAMING_LOW_LATENCY",
+        ""
+      ],
+      "Type": "Property"
+    },
+    {
       "Name": "PowerHALRenderingState",
       "Path": "vendor.powerhal.rendering",
       "Values": [
@@ -451,24 +442,6 @@
       "Node": "CPULittleClusterMinFreq",
       "Duration": 3000,
       "Value": "9999999"
-    },
-    {
-      "PowerHint": "INTERACTIVE",
-      "Node": "CPULittleClusterGovernor",
-      "Duration": 0,
-      "Value": "schedutil"
-    },
-    {
-      "PowerHint": "INTERACTIVE",
-      "Node": "CPUBigClusterGovernor",
-      "Duration": 0,
-      "Value": "schedutil"
-    },
-    {
-      "PowerHint": "INTERACTIVE",
-      "Node": "CPUBigPlusClusterGovernor",
-      "Duration": 0,
-      "Value": "schedutil"
     },
     {
       "PowerHint": "LAUNCH",
@@ -799,6 +772,24 @@
       "Node": "CPULittleClusterMinFreq",
       "Duration": 1000,
       "Value": "9999999"
+    },
+    {
+      "PowerHint": "AUDIO_LAUNCH",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 2000,
+      "Value": "2c"
+    },
+    {
+      "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
+      "Node": "PowerHALAudioState",
+      "Duration": 0,
+      "Value": "AUDIO_STREAMING_LOW_LATENCY"
+    },
+    {
+      "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 0,
+      "Value": "2c"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
